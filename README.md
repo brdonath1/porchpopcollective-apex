@@ -1,19 +1,22 @@
-# porchpopcollective-apex
+# porchpopcollective-apex — retired
 
-GitHub Pages site that forwards the bare domain `porchpopcollective.com` to `https://www.porchpopcollective.com`, preserving path and query.
+This former GitHub Pages redirector was retired on September 18, 2026. Its Pages
+site is unpublished, and the obsolete redirect pages and `CNAME` file have been
+removed. The repository is retained as a read-only historical archive.
 
-Why this exists: the domain is registered at Wix, which does not allow changing name servers and allows only an `A` record at the root; the site itself runs on Railway, which provides only `CNAME` targets. GitHub Pages publishes fixed A-record IPs and free HTTPS, so it can hold the root while `www` points at Railway.
+The live routing verified at retirement is:
 
-DNS at Wix (Manage DNS Records):
+- `porchpopcollective.com` uses redirect.pizza, which returns a permanent HTTP 301
+  redirect to `https://www.porchpopcollective.com`, preserving the path and query.
+- `www.porchpopcollective.com` serves the application on Railway.
+- Application development and operations belong in
+  [brdonath1/porch-pop-collective](https://github.com/brdonath1/porch-pop-collective).
 
-| Type | Host | Value |
-|---|---|---|
-| A | @ | 185.199.108.153 |
-| A | @ | 185.199.109.153 |
-| A | @ | 185.199.110.153 |
-| A | @ | 185.199.111.153 |
-| CNAME | www | the Railway custom-domain target for `www.porchpopcollective.com` |
+Both authoritative Wix DNS servers and the Cloudflare and Google public resolvers
+agreed on this routing. No current application code or workflow depended on this
+repository. The public domain's DNS records and its working redirect were preserved.
 
-Repo settings → Pages → Source: Deploy from a branch, `main` / `(root)`; custom domain `porchpopcollective.com`; Enforce HTTPS once the certificate is issued.
-
-Phase 1: transfer the registration to Cloudflare Registrar (after Wix's 60-day lock) and point the root at Railway with CNAME flattening; then this repo retires.
+Do not re-enable GitHub Pages or point the domain at GitHub Pages using the old
+setup instructions. Any future routing change needs a fresh review of the live
+DNS and customer-facing behavior. The original implementation remains in Git
+history for reference; it is not the current production configuration.
